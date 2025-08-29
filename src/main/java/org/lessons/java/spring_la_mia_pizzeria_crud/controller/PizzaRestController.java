@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/pizze")
@@ -65,6 +66,17 @@ public class PizzaRestController {
 
         service.delateById(id);
         return new ResponseEntity<Pizza>(HttpStatus.OK);
+    }
+
+    @GetMapping("/searchname")
+    public ResponseEntity<Pizza> searchName(@RequestParam String name) {
+        List<Pizza> pizzaAttempt = service.findByName(name);
+
+        if (pizzaAttempt.isEmpty()) {
+            return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
+        }
+
+        return ResponseEntity.ok(pizzaAttempt.get(0));
     }
 
 }
