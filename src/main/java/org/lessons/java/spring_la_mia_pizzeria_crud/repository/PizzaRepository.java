@@ -6,5 +6,5 @@ import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
-    List<Pizza> findByTitleContainIgnoreCase(String title);
+    List<Pizza> findByTitleContainIgnoreCase(String name);
 }

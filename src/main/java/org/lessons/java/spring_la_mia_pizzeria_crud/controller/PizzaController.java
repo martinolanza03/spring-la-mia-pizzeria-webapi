@@ -93,7 +93,6 @@ public class PizzaController {
 
     @PostMapping("/delete/{id}")
     public String delate(@PathVariable("id") Integer id) {
-
         repository.deleteById(id);
 
         return "redirect:/pizze";
