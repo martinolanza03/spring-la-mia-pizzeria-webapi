@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pizze List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <h1>Pizza Singola</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Prezzo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:object="${pizza}">
+                <td>[[*{name}]]</td>
+                <td>[[*{description}]]</td>
+                <td>[[*{price}]] </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <h2>Offerte Speciali</h2>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Inizio Offerta</th>
+                <th>Fine Offerta</th>
+                <th>Offerta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="offer : *{pizza.offers}">
+                <td>[[${offer.title}]]</td>
+                <td>[[${offer.startOffer}]]</td>
+                <td>[[${offer.endOffer}]]</td>
+                <td><a th:href="@{/offers/{id}/edit(id=${offer.id})}">Modifica Offerta</a></td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+</body>
+
+</html>

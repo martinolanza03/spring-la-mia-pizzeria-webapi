@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pizze List</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <h1>Lista delle Pizze</h1>
+    <h2>
+        <a th:href="@{/pizze/create}">Crea Pizza</a>
+    </h2>
+    <table th:if="${pizze.size() > 0}">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Prezzo</th>
+                <th>Opzioni Pizza</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="pizza : ${pizze}" th:object="${pizza}">
+                <td>[[*{name}]]</td>
+                <td>[[*{description}]]</td>
+                <td>[[*{price}]] </td>
+                <td>
+                    <a th:href="@{/pizze/{id}(id=${pizza.id})}">Dettagli</a>
+                    <a th:href="@{/pizze/edit/{id}(id=${pizza.id})}"> Modifica Pizza</a>
+                    <a th:href="@{/pizze/{id}/offer(id=${pizza.id})}">Offerta</a>
+
+                    <form action="#" th:action="@{'/pizze/delete/{id}'(id=${pizza.id})}" method="post">
+                        <button type="submit" id="submitButton">Elimina Pizza</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+
+        <p th:text="No pizze aviable" th:unless="${pizze.size() > 0}" />
+    </table>
+</body>
+
+</html>

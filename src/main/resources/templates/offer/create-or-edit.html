@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Crea Pizza</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <th:block>
+        <div class="container mt-5">
+            <h2>Crea una nuova offerta per [[${offer.getPizza().getName}]]</h2>
+            <form th:action="${edit} ? @{/offers/{id}/edit(id=${offer.id})} : @{/offers/create}" th:object="${offer}"
+                method="post" class="mt-4">
+                <input type="hidden" th:field="*{pizza}">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Titolo offerta</label>
+                    <input th:field="*{title}" class="form-control" id="title" type="text" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+                        <span th:each="error: ${#fields.errors('title')}" th:text="${error}"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="start-offer" class="form-label">Data di inizio</label>
+                    <input th:field="*{startOffer}" class="form-control" id="start-offer" type="date"
+                        th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('startOffer')}" class="invalid-feedback">
+                        <span th:each="error: ${#fields.errors('startOffer')}" th:text="${error}"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="end-offer" class="form-label">Data di fine</label>
+                    <input th:field="*{endOffer}" class="form-control" id="end-offer" type="date"
+                        th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('endOffer')}" class="invalid-feedback">
+                        <span th:each="error: ${#fields.errors('endOffer')}" th:text="${error}"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Crea</button>
+                <a th:href="@{/pizze}" class="btn btn-secondary ms-2">Annulla</a>
+            </form>
+        </div>
+    </th:block>
+</body>
+
+</html>
+</div>
