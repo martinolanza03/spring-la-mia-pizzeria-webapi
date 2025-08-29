@@ -18,8 +18,8 @@ public class PizzaService {
         return pizzaRepository.findAll();
     }
 
-    public List<Pizza> findByTitle(String name) {
-        return pizzaRepository.findByTitleContainIgnoreCase(name);
+    public List<Pizza> findByName(String name) {
+        return pizzaRepository.findByNameContainingIgnoreCase(name);
     }
 
     public Optional<Pizza> findById(Integer id) {
